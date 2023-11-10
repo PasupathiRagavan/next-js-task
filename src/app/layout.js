@@ -1,5 +1,11 @@
+import Breadcrumb from './components/base/Breadcrumb'
+
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Header from './components/layout/header/Header'
+import SideBar from './components/layout/sidebar/SideBar'
+import MainContent from './components/layout/content/maincontent'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,9 +15,24 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+
+	return (
+		<html lang="en">
+			<body className={inter.className}>
+				<Header />
+				<SideBar />
+				<MainContent>
+					<Breadcrumb
+						homeElement={'Home'}
+						separator={<span className="text-gray-300"> | </span>}
+						activeClasses='text-blue-600'
+						containerClasses='hidden lg:flex lg:items-center py-3' 
+						listClasses='hover:underline mx-2 text-sm font-medium'
+						capitalizeLinks
+					/>
+					{children}
+				</MainContent>
+			</body>
+		</html>
+  	)
 }
